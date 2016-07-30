@@ -20,8 +20,11 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="FileReader.cpp">
+    <ClCompile Include="test_main.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="jsontest.txt" />
   </ItemGroup>
 </Project>
