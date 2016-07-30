@@ -6,8 +6,6 @@
 #include <string>
 
 
-
-
 class FileReader
 {
 public:
@@ -17,18 +15,21 @@ public:
 
 	bool test();
 
+	bool set_file(std::string file_name);
+
+	std::string GetString() const;//return std::string generator by content in file_buf_.
+
 private:
 	std::string file_name_;
 
-	long GetSize();
-
-	bool LoadFile();
 protected:
-	long file_size_;
+	long file_size_ = -1;//Defaul value is -1,when get size from file false set value as -1.
 
-	char *file_buf_;
-
+	char * file_buf_;
 	
+	long GetSize();//Get size of the file(according to file_name_).
+
+	bool LoadFile();//Load file to memory,file_buf is the point.
 };
 
 inline FileReader::FileReader()
@@ -56,6 +57,24 @@ inline bool FileReader::test()
 	return true;
 }
 
+inline bool FileReader::set_file(std::string file_name)
+{
+	if(!file_name.empty())
+	{
+		file_name_ = file_name;
+		return true;
+	}else
+	{
+		return false;
+	}
+	
+}
+
+inline std::string FileReader::GetString() const
+{
+	return std::string(file_buf_);
+}
+
 inline long FileReader::GetSize()
 {
 	try
@@ -76,36 +95,33 @@ inline long FileReader::GetSize()
 	{
 		std::cerr << "Error in open file." << std::endl;
 	}
+	return -1;
 }
 
 inline bool FileReader::LoadFile()
 {
 	try
 	{
-		if( file_size_ == 0)
+		if (file_size_ < 0 && GetSize() < 0)
 		{
-			if(GetSize()==0)
-			{
-				std::cerr << "File" << file_name_ << " is empty !" << std::endl;
-			}
-
+			std::cerr << "File" << file_name_ << " is empty !" << std::endl;
 		}
 
-		file_buf_ = new char[file_size_];
+		file_buf_ = new char[file_size_ + 1];
 
-		FILE *file;
+		FILE* file;
 		file = fopen(file_name_.c_str(), "r");
-
-	
 
 		fread(file_buf_, file_size_, 1, file);
 
 		fclose(file);
 
-		return true;
+		file_buf_[file_size_] = '\0';
 
-	}catch(...)
+		return true;
+	}
+	catch (...)
 	{
-		
+		std::cerr << "Error in FileReader::LoadFile()." << std::endl;
 	}
 }

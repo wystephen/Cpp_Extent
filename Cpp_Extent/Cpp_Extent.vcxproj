@@ -143,6 +143,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="FileReader.h" />
+    <ClInclude Include="JsonCodert.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="test_main.cpp" />

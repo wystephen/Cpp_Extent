@@ -18,6 +18,9 @@
     <ClInclude Include="FileReader.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="JsonCodert.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="test_main.cpp">
