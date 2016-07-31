@@ -17,7 +17,7 @@ public:
 
 	bool test();
 
-	bool decode();
+	bool Decoder();
 
 	
 
@@ -26,6 +26,8 @@ private:
 
 protected:
 	std::map<std::string, std::string> content_map_;
+
+	bool ValueDecoder(std::string value_str);
 };
 
 inline JsonCoder::JsonCoder()
@@ -38,7 +40,7 @@ inline JsonCoder::JsonCoder(std::string str)
 	
 	s_buf_ = str;
 	
-	decode();
+	Decoder();
 }
 
 inline JsonCoder::~JsonCoder()
@@ -56,7 +58,9 @@ inline bool JsonCoder::test()
 	return true;
 }
 
-inline bool JsonCoder::decode()
+
+
+inline bool JsonCoder::Decoder()
 {
 	try
 	{
@@ -167,5 +171,28 @@ inline bool JsonCoder::decode()
 	}catch(...)
 	{
 		
+	}
+}
+
+inline bool JsonCoder::ValueDecoder(std::string value_str)
+{
+	try
+	{
+	
+		if(value_str.size() >= 1)
+		{
+			std::cerr << "value is empty:" << std::endl;
+
+		}
+
+
+		
+
+	}catch(double a)
+	{
+		if(a < 1.0)
+		{
+			std::cerr << "error:'" << a << std::endl;
+		}
 	}
 }
