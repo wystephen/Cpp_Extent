@@ -25,8 +25,8 @@ private:
 protected:
 	long file_size_ = -1;//Defaul value is -1,when get size from file false set value as -1.
 
-	char * file_buf_;
-	
+	char* file_buf_;
+
 	long GetSize();//Get size of the file(according to file_name_).
 
 	bool LoadFile();//Load file to memory,file_buf is the point.
@@ -59,15 +59,15 @@ inline bool FileReader::test()
 
 inline bool FileReader::set_file(std::string file_name)
 {
-	if(!file_name.empty())
+	if (!file_name.empty())
 	{
 		file_name_ = file_name;
 		return true;
-	}else
+	}
+	else
 	{
 		return false;
 	}
-	
 }
 
 inline std::string FileReader::GetString() const
@@ -77,17 +77,16 @@ inline std::string FileReader::GetString() const
 
 inline long FileReader::GetSize()
 {
+	//TODO:加强异常处理机制
 	try
 	{
 		std::ifstream tmp_f(file_name_);
-
-
 		tmp_f.seekg(0, std::ios::end);
 		std::streampos ps = tmp_f.tellg();
 
 		file_size_ = ps;
 
-		std::cout << "file_size :" << file_size_ << std::endl;
+		//std::cout << "file_size :" << file_size_ << std::endl;
 
 		return ps;
 	}
@@ -124,4 +123,5 @@ inline bool FileReader::LoadFile()
 	{
 		std::cerr << "Error in FileReader::LoadFile()." << std::endl;
 	}
+	return false;
 }
