@@ -19,6 +19,8 @@ public:
 
 	bool Decoder();
 
+	bool ClearString();
+
 	
 
 private:
@@ -39,6 +41,8 @@ inline JsonCoder::JsonCoder(std::string str)
 {
 	
 	s_buf_ = str;
+
+	ClearString();
 	
 	Decoder();
 }
@@ -172,6 +176,26 @@ inline bool JsonCoder::Decoder()
 	{
 		
 	}
+}
+
+inline bool JsonCoder::ClearString()
+{
+	std::string::iterator pos(s_buf_.begin());
+
+	while (pos != s_buf_.end())
+	{
+		 if(*pos == '\n')
+		 {
+			 s_buf_.erase(pos);
+		 }else if(*pos == ' ')
+		 {
+			 s_buf_.erase(pos);
+		 }
+
+		++pos;
+
+	}
+	return true;
 }
 
 inline bool JsonCoder::ValueDecoder(std::string value_str)

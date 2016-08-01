@@ -142,6 +142,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="AutoJsonDecoder.h" />
     <ClInclude Include="FileReader.h" />
     <ClInclude Include="JsonCodert.h" />
   </ItemGroup>
