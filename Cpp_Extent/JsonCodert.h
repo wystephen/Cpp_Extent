@@ -42,7 +42,13 @@ inline JsonCoder::JsonCoder(std::string str)
 	
 	s_buf_ = str;
 
+	std::cout << "str size:" << str.length() << "s_buf_size:" << s_buf_.size();
+	
+	std::cout << str << std::endl << std::endl;
+
 	ClearString();
+
+	std::cout << s_buf_ << std::endl << std::endl;
 	
 	Decoder();
 }
