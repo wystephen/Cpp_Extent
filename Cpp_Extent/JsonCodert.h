@@ -21,7 +21,6 @@ public:
 
 	bool ClearString();
 
-	
 
 private:
 	std::string s_buf_;
@@ -39,42 +38,39 @@ inline JsonCoder::JsonCoder()
 
 inline JsonCoder::JsonCoder(std::string str)
 {
-	
 	s_buf_ = str;
 
-	std::cout << "str size:" << str.length() << "s_buf_size:" << s_buf_.size();
-	
-	std::cout << str << std::endl << std::endl;
+	//std::cout << "str size:" << str.length() << "s_buf_size:" << s_buf_.size();
+
+	//std::cout << str << std::endl << std::endl;
 
 	ClearString();
 
 	std::cout << s_buf_ << std::endl << std::endl;
-	
+
 	Decoder();
 }
 
 inline JsonCoder::~JsonCoder()
 {
-
 }
 
 inline bool JsonCoder::test()
 {
-	for(std::map<std::string,std::string>::iterator it(content_map_.begin());it!=content_map_.end();it++)
+	for (std::map<std::string, std::string>::iterator it(content_map_.begin()); it != content_map_.end(); it++)
 	{
-		std::cout << it->first << " : " << it->second << std::endl << std::endl<< std::endl;
+		std::cout << it->first << " : " << it->second << std::endl << std::endl << std::endl;
 	}
 
 	return true;
 }
 
 
-
 inline bool JsonCoder::Decoder()
 {
 	try
 	{
-		if(s_buf_.empty())
+		if (s_buf_.empty())
 		{
 			std::cerr << "The value s_buf_ which is save the string is empty!" << std::endl;
 			return false;
@@ -89,10 +85,10 @@ inline bool JsonCoder::Decoder()
 
 		//std::cout << "size of buf:" << s_buf_.size() << std::endl;
 
-		while(true)
+		while (true)
 		{
-			tmp_comma_index = s_buf_.find(',', 1+comma_index);
-			if(tmp_comma_index != std::string::npos)
+			tmp_comma_index = s_buf_.find(',', 1 + comma_index);
+			if (tmp_comma_index != std::string::npos)
 			{
 				//if(s_buf_.find('{',comma_index+1)<tmp_comma_index)//有子结构存在
 				//{
@@ -120,14 +116,13 @@ inline bool JsonCoder::Decoder()
 				//		}
 				//	}
 				//}
-				
-			}else
+			}
+			else
 			{
-				
 				tmp_comma_index = s_buf_.find('}', comma_index + 1);
 			}
 
-			if (s_buf_.find('{', comma_index + 1)<tmp_comma_index)//有子结构存在
+			if (s_buf_.find('{', comma_index + 1) < tmp_comma_index)//有子结构存在
 			{
 				std::vector<int> pair_stack;
 				pair_stack.push_back(s_buf_.find('{', comma_index + 1));
@@ -160,8 +155,8 @@ inline bool JsonCoder::Decoder()
 
 			if (colon_index != std::string::npos && colon_index < tmp_comma_index)
 			{
-				tmp_key = s_buf_.substr(comma_index + 1, colon_index - comma_index-1);
-				tmp_value = s_buf_.substr(colon_index + 1, tmp_comma_index - colon_index-1);
+				tmp_key = s_buf_.substr(comma_index + 1, colon_index - comma_index - 1);
+				tmp_value = s_buf_.substr(colon_index + 1, tmp_comma_index - colon_index - 1);
 			}
 			else
 			{
@@ -172,15 +167,14 @@ inline bool JsonCoder::Decoder()
 
 			content_map_.insert(std::map<std::string, std::string>::value_type(tmp_key, tmp_value));
 			comma_index = tmp_comma_index;
-			if(tmp_comma_index == s_buf_.size())
+			if (tmp_comma_index == s_buf_.size())
 			{
 				break;
 			}
 		}
-
-	}catch(...)
+	}
+	catch (...)
 	{
-		
 	}
 }
 
@@ -188,18 +182,30 @@ inline bool JsonCoder::ClearString()
 {
 	std::string::iterator pos(s_buf_.begin());
 
+	int del_num(0);
+
 	while (pos != s_buf_.end())
 	{
-		 if(*pos == '\n')
-		 {
-			 s_buf_.erase(pos);
-		 }else if(*pos == ' ')
-		 {
-			 s_buf_.erase(pos);
-		 }
+		if (*pos == '\n')
+		{
+			s_buf_.erase(pos);
+			++del_num;
+		}
+		else if (*pos == ' ')
+		{
+			s_buf_.erase(pos);
+			++del_num;
+		}
+		else if ((*pos & 0xff) < 0x20 || (*pos & 0xff) > 0x7E)
+		{
+			s_buf_.erase(pos);
+			++del_num;
+		}
+		else
 
-		++pos;
-
+		{
+			++pos;
+		}
 	}
 	return true;
 }
@@ -208,19 +214,14 @@ inline bool JsonCoder::ValueDecoder(std::string value_str)
 {
 	try
 	{
-	
-		if(value_str.size() >= 1)
+		if (value_str.size() >= 1)
 		{
 			std::cerr << "value is empty:" << std::endl;
-
 		}
-
-
-		
-
-	}catch(double a)
+	}
+	catch (double a)
 	{
-		if(a < 1.0)
+		if (a < 1.0)
 		{
 			std::cerr << "error:'" << a << std::endl;
 		}
