@@ -88,34 +88,40 @@ inline bool JsonCoder::Decoder()
 		while (true)
 		{
 			tmp_comma_index = s_buf_.find(',', 1 + comma_index);
+
+
+			if (s_buf_.find('[', comma_index + 1) < tmp_comma_index)//有子结构存在
+			{
+				std::vector<int> pair_stack;
+				pair_stack.push_back(s_buf_.find('[', comma_index + 1));
+				int tmp_index(s_buf_.find('[', comma_index + 1));
+				while (true)
+				{
+					tmp_index++;
+					if (s_buf_[tmp_index] == '[')
+					{
+						pair_stack.push_back(tmp_index);
+					}
+					else if (s_buf_[tmp_index] == ']')
+					{
+						pair_stack.pop_back();
+					}
+
+					if (pair_stack.size() == 0)
+					{
+						tmp_comma_index = tmp_index + 1;
+						break;
+					}
+					else
+					{
+						//tmp_index++;
+					}
+				}
+			}
+
 			if (tmp_comma_index != std::string::npos)
 			{
-				//if(s_buf_.find('{',comma_index+1)<tmp_comma_index)//有子结构存在
-				//{
-				//	std::vector<int> pair_stack;
-				//	pair_stack.push_back(s_buf_.find('{', comma_index + 1));
-				//	int tmp_index(pair_stack[0]);
-				//	while(true)
-				//	{
-				//		tmp_index++;
-				//		if(s_buf_[tmp_index] == '{')
-				//		{
-				//			pair_stack.push_back(tmp_index);
-				//		}else if(s_buf_[tmp_index] == '}')
-				//		{
-				//			pair_stack.pop_back();
-				//		}
 
-				//		if(pair_stack.size()==0)
-				//		{
-				//			tmp_comma_index = tmp_index + 1;
-				//			break;
-				//		}else
-				//		{
-				//			tmp_index++;
-				//		}
-				//	}
-				//}
 			}
 			else
 			{
@@ -176,6 +182,7 @@ inline bool JsonCoder::Decoder()
 	catch (...)
 	{
 	}
+	return false;
 }
 
 inline bool JsonCoder::ClearString()
@@ -202,7 +209,6 @@ inline bool JsonCoder::ClearString()
 			++del_num;
 		}
 		else
-
 		{
 			++pos;
 		}
