@@ -6,6 +6,7 @@
 
 #include "FileReader.h"
 #include "JsonCodert.h"
+#include "JsonObject.h"
 
 int main()
 {
@@ -19,7 +20,8 @@ int main()
 	
 	//JsonCoder jc("{\"number\":1,\"rray\":[],\"null\":null,\"string\":\"leo108\",\"boolean\":true,\"obj\":{},\"level1\":{\"level2\":{\"level3\":{\"level4\":{\"level5\":{\"level6\":{\"level7\":{\"level8\":{}}}}}}}}}");
 
-	JsonCoder jc(fr.GetString());
+	JsonCoder
+		jc(fr.GetString());
 
 	jc.test();
 	
