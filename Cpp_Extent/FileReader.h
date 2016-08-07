@@ -77,7 +77,7 @@ inline std::string FileReader::GetString() const
 
 inline long FileReader::GetSize()
 {
-	//TODO:加强异常处理机制
+
 	try
 	{
 		std::ifstream tmp_f(file_name_);
@@ -86,7 +86,7 @@ inline long FileReader::GetSize()
 
 		file_size_ = ps;
 
-		//std::cout << "file_size :" << file_size_ << std::endl;
+		std::cout << "file_size :" << file_size_ << std::endl;
 
 		return ps;
 	}
@@ -103,7 +103,7 @@ inline bool FileReader::LoadFile()
 	{
 		if (file_size_ < 0 && GetSize() < 0)
 		{
-			std::cerr << "File" << file_name_ << " is empty !" << std::endl;
+			std::cerr << "File " << file_name_ << " is empty !" << std::endl;
 		}
 
 		file_buf_ = new char[file_size_ + 1];
