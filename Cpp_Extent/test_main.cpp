@@ -10,7 +10,8 @@
 
 int main()
 {
-
+	JsonObject job;
+	JsonObject t = job["aaa"];
 	
 	FileReader fr("jsontest.txt");
 
