@@ -23,12 +23,14 @@ public:
 
 
 private:
-	std::string s_buf_;
+	
 
 protected:
 	std::map<std::string, std::string> content_map_;
 
 	bool ValueDecoder(std::string value_str);
+
+	std::string s_buf_;
 };
 
 inline JsonCoder::JsonCoder()
