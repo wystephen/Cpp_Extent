@@ -17,7 +17,6 @@ enum ValueType
 	DOUBLE = 2,
 	STRING = 3,
 	ARRAY = 4,
-	
 };
 
 class JsonObject:public JsonCoder
@@ -26,7 +25,6 @@ public:
 
 	JsonObject(): int_value_(0), double_value_(0)
 	{
-		
 	}
 
 	JsonObject(std::string value_str)
@@ -39,33 +37,42 @@ public:
 			ClearString();
 			Decoder();
 
-			for(std::map<std::string,std::string>::iterator it = content_map_.begin();
-				it != content_map_.end();++it)
+			for (std::map<std::string, std::string>::iterator it = content_map_.begin();
+			     it != content_map_.end(); ++it)
 			{
 				JsonObject tmp_value(it->second);
-				
-				map_.insert(std::map<std::string, JsonObject>::value_type(it->first.substr(1,it->first.size()-2), tmp_value));
+
+				map_.insert(std::map<std::string, JsonObject>::value_type(it->first.substr(1, it->first.size() - 2), tmp_value));
 			}
-			
 		}
 		else if (-1 != value_str.find('['))
 		{
 			value_type_ = ValueType::ARRAY;
-
 		}
-		else if(-1 != value_str.find("\"")){
+		else if (-1 != value_str.find("\""))
+		{
 			value_type_ = ValueType::STRING;
-
+		}
+		else if (-1 != value_str.find("."))
+		{
+			value_type_ = ValueType::DOUBLE;
+		}
+		else if (-1 != value_str.find("e"))
+		{
+			value_type_ = ValueType::DOUBLE;
+		}
+		else
+		{
+			value_type_ = ValueType::INT;
 		}
 	}
 
 	~JsonObject()
 	{
-		
 	}
 
 	ValueType value_type_ = EMPTY;
-	
+
 	std::map<std::string, JsonObject> map_;
 
 	std::string str_value_;
@@ -80,17 +87,15 @@ public:
 	double AsDouble() const;
 
 	JsonObject operator[](std::string key);
-
-
-
 };
 
 inline std::string JsonObject::AsString() const
 {
-	if(value_type_==ValueType::STRING)
+	if (value_type_ == ValueType::STRING)
 	{
 		return str_value_;
-	}else
+	}
+	else
 	{
 		//TODO:ADD transform between diffirent value type.
 		return std::string("");
@@ -99,10 +104,11 @@ inline std::string JsonObject::AsString() const
 
 inline int JsonObject::AsInt() const
 {
-	if(value_type_==ValueType::INT)
+	if (value_type_ == ValueType::INT)
 	{
 		return int_value_;
-	}else
+	}
+	else
 	{
 		return 0;
 	}
@@ -110,10 +116,11 @@ inline int JsonObject::AsInt() const
 
 inline double JsonObject::AsDouble() const
 {
-	if(value_type_==ValueType::DOUBLE)
+	if (value_type_ == ValueType::DOUBLE)
 	{
 		return double_value_;
-	}else
+	}
+	else
 	{
 		return 0;
 	}
@@ -123,10 +130,11 @@ inline JsonObject JsonObject::operator[](std::string key)
 {
 	std::map<std::string, JsonObject>::iterator ite;
 	ite = map_.find(key);
-	if(ite != map_.end())
+	if (ite != map_.end())
 	{
 		return ite->second;
-	}else
+	}
+	else
 	{
 		std::cout << "There are not a key : " << key << " in json document." << std::endl;
 		return JsonObject();
