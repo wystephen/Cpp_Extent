@@ -16,16 +16,47 @@ enum ValueType
 	INT = 1,
 	DOUBLE = 2,
 	STRING = 3,
+	ARRAY = 4,
 	
 };
 
-class JsonObject
+class JsonObject:public JsonCoder
 {
 public:
 
 	JsonObject(): int_value_(0), double_value_(0)
 	{
 		
+	}
+
+	JsonObject(std::string value_str)
+	{
+		if (-1 != value_str.find('{'))
+		{
+			value_type_ = ValueType::OBJECT;
+			s_buf_ = value_str;
+
+			ClearString();
+			Decoder();
+
+			for(std::map<std::string,std::string>::iterator it = content_map_.begin();
+				it != content_map_.end();++it)
+			{
+				JsonObject tmp_value(it->second);
+				
+				map_.insert(std::map<std::string, JsonObject>::value_type(it->first.substr(1,it->first.size()-2), tmp_value));
+			}
+			
+		}
+		else if (-1 != value_str.find('['))
+		{
+			value_type_ = ValueType::ARRAY;
+
+		}
+		else if(-1 != value_str.find("\"")){
+			value_type_ = ValueType::STRING;
+
+		}
 	}
 
 	~JsonObject()
