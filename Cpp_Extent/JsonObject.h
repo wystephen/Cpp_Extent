@@ -8,6 +8,9 @@
 
 #include "JsonCodert.h"
 
+#include <stdio.h>
+#include <stdlib.h>
+
 
 enum ValueType
 {
@@ -27,45 +30,7 @@ public:
 	{
 	}
 
-	JsonObject(std::string value_str)
-	{
-		if (-1 != value_str.find('{'))
-		{
-			value_type_ = ValueType::OBJECT;
-			s_buf_ = value_str;
-
-			ClearString();
-			Decoder();
-
-			for (std::map<std::string, std::string>::iterator it = content_map_.begin();
-			     it != content_map_.end(); ++it)
-			{
-				JsonObject tmp_value(it->second);
-
-				map_.insert(std::map<std::string, JsonObject>::value_type(it->first.substr(1, it->first.size() - 2), tmp_value));
-			}
-		}
-		else if (-1 != value_str.find('['))
-		{
-			value_type_ = ValueType::ARRAY;
-		}
-		else if (-1 != value_str.find("\""))
-		{
-			value_type_ = ValueType::STRING;
-		}
-		else if (-1 != value_str.find("."))
-		{
-			value_type_ = ValueType::DOUBLE;
-		}
-		else if (-1 != value_str.find("e"))
-		{
-			value_type_ = ValueType::DOUBLE;
-		}
-		else
-		{
-			value_type_ = ValueType::INT;
-		}
-	}
+	JsonObject(std::string value_str);
 
 	~JsonObject()
 	{
@@ -74,10 +39,10 @@ public:
 	ValueType value_type_ = EMPTY;
 
 	std::map<std::string, JsonObject> map_;
-
 	std::string str_value_;
 	int int_value_;
 	double double_value_;
+	std::vector<JsonObject> array_value_;
 
 
 	std::string AsString() const;
@@ -87,7 +52,95 @@ public:
 	double AsDouble() const;
 
 	JsonObject operator[](std::string key);
+
+	JsonObject operator[](int index);
 };
+
+inline JsonObject::JsonObject(std::string value_str)
+{
+	if (-1 != value_str.find('{'))
+	{
+		value_type_ = ValueType::OBJECT;
+		s_buf_ = value_str;
+
+		ClearString();
+		Decoder();
+
+		for (std::map<std::string, std::string>::iterator it = content_map_.begin();
+		     it != content_map_.end(); ++it)
+		{
+			JsonObject tmp_value(it->second);
+
+			map_.insert(std::map<std::string, JsonObject>::value_type(it->first.substr(1, it->first.size() - 2), tmp_value));
+		}
+	}
+	else if (-1 != value_str.find('['))
+	{
+		value_type_ = ValueType::ARRAY;
+		size_t begin_index(value_str.find("[")), last_index(value_str.find_last_of("]"));
+		int l_index = begin_index+1,r_index = begin_index;
+		while(true)
+		{
+			r_index = value_str.find(",", l_index);
+			if(r_index == -1)
+			{
+				break;
+			}
+			if(0<value_str.find("[")<r_index || 0<value_str.find("{")<r_index)
+			{
+				//element may be array or object
+
+
+				if(value_str.find("{")<value_str.find("["))
+				{
+					
+				}
+
+			}else
+			{
+				array_value_.push_back(JsonObject(value_str.substr(l_index, r_index)));
+			}
+
+		}
+	}
+	else if (-1 != value_str.find("\""))
+	{
+		//value type is string , save value delete "\"".
+		value_type_ = ValueType::STRING;
+		size_t begin_index = value_str.find("\"");
+		size_t last_end_index(begin_index), end_index(begin_index);
+
+		while(true)//find index of last "\"" in value_str.
+		{
+			last_end_index = value_str.find("\"", end_index);
+			if(last_end_index != -1)
+			{
+				end_index = last_end_index;
+			}
+			else
+			{
+				break;
+			}
+		}
+		str_value_ = value_str.substr(begin_index + 1, end_index - 1);
+	}
+	else if (-1 != value_str.find("."))
+	{
+		value_type_ = ValueType::DOUBLE;
+		double_value_ = atof(value_str.c_str());
+	}
+	else if (-1 != value_str.find("e"))
+	{
+		value_type_ = ValueType::DOUBLE;
+		double_value_ = atof(value_str.c_str());
+
+	}
+	else
+	{
+		value_type_ = ValueType::INT;
+		int_value_ = atoi(value_str.c_str());
+	}
+}
 
 inline std::string JsonObject::AsString() const
 {
@@ -137,6 +190,25 @@ inline JsonObject JsonObject::operator[](std::string key)
 	else
 	{
 		std::cout << "There are not a key : " << key << " in json document." << std::endl;
+		return JsonObject();
+	}
+}
+
+inline JsonObject JsonObject::operator[](int index)
+{
+	if(value_type_ == ValueType::ARRAY)
+	{
+		if(index > array_value_.size())
+		{
+			std::cout << "Index : " << index << " is out of range 0-" << array_value_.size() << std::endl;
+			return JsonObject();
+		}else
+		{
+			return array_value_.at(index);
+		}
+	}else
+	{
+		std::cout << " This value is not a array!" << std::endl;
 		return JsonObject();
 	}
 }
