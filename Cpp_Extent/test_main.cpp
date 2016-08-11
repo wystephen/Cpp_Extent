@@ -27,10 +27,14 @@ int main()
 	jc.test();*/
 
 	JsonObject job(fr.GetString());
-	JsonObject t = job["null"];
+
+	JsonObject tmp_j = job["array"];
+	
+	std::cout << job["objectarray"][2]["a"].AsString() << std::endl;
 	
 
 	getchar();
+
 	return 0;
 
 }

@@ -89,7 +89,7 @@ inline JsonObject::JsonObject(std::string value_str)
 		while(true)
 		{
 
-			r_index = value_str.find(",", l_index);
+			r_index = value_str.find(",", l_index+1);
 			if(r_index == -1)
 			{
 
@@ -97,10 +97,11 @@ inline JsonObject::JsonObject(std::string value_str)
 				is_end = true;
 			}
 
-				if (-1<value_str.find("[")<r_index)
+				if (-1<value_str.find("[",l_index)<r_index)
 				{
 					//element may be array 
-					array_value_.push_back(JsonObject(value_str.substr(value_str.find("[") + 1, value_str.find_last_of("]") - 1)));
+					//TODO:Some error in here.
+					array_value_.push_back(JsonObject(value_str.substr(value_str.find("[")+1 , value_str.find_last_of("]",r_index)-1 )));
 				}
 				else
 				{
@@ -120,21 +121,28 @@ inline JsonObject::JsonObject(std::string value_str)
 		//value type is string , save value delete "\"".
 		value_type_ = ValueType::STRING;
 		size_t begin_index = value_str.find("\"");
-		size_t last_end_index(begin_index), end_index(begin_index);
+		size_t end_index(value_str.find_last_of("\""));
 
-		while(true)//find index of last "\"" in value_str.
-		{
-			last_end_index = value_str.find("\"", end_index);
-			if(last_end_index != -1)
-			{
-				end_index = last_end_index;
-			}
-			else
-			{
-				break;
-			}
-		}
+
 		str_value_ = value_str.substr(begin_index + 1, end_index - 1);
+	}
+	else if(-1 != value_str.find("true"))
+	{
+		value_type_ = ValueType::BOOL;
+
+		bool_value_ = true;
+	}
+	else if(-1!= value_str.find("false"))
+	{
+		value_type_ = ValueType::BOOL;
+
+		bool_value_ = false;
+	}
+	else if(-1 != value_str.find("null"))
+	{
+		value_type_ = ValueType::ISNULL;
+
+
 	}
 	else if (-1 != value_str.find("."))
 	{

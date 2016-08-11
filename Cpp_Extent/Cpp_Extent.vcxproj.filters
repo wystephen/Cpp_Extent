@@ -21,9 +21,6 @@
     <ClInclude Include="JsonCodert.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="AutoJsonDecoder.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="JsonObject.h">
       <Filter>头文件</Filter>
     </ClInclude>

@@ -4,6 +4,24 @@
         2,
         3
     ],
+	"objectarray":[
+	
+	"object1": {
+        "a": "bb",
+        "c": "d",
+        "e": "f"
+    },
+	"object2": {
+        "a": "bbb",
+        "c": "d",
+        "e": "f"
+    },
+	"object3": {
+        "a": "bbbb",
+        "c": "d",
+        "e": "f"
+    }
+	]
     "boolean": true,
     "null": null,
     "number": 123,
