@@ -20,6 +20,8 @@ enum ValueType
 	DOUBLE = 2,
 	STRING = 3,
 	ARRAY = 4,
+	ISNULL = 5,
+	BOOL = 6,
 };
 
 class JsonObject:public JsonCoder
@@ -43,6 +45,7 @@ public:
 	int int_value_;
 	double double_value_;
 	std::vector<JsonObject> array_value_;
+	bool bool_value_;
 
 
 	std::string AsString() const;
@@ -58,7 +61,7 @@ public:
 
 inline JsonObject::JsonObject(std::string value_str)
 {
-	if (-1 != value_str.find('{'))
+	if (-1 != value_str.find('{') && (value_str.find("{")<value_str.find('[') || value_str.find("[")<0))
 	{
 		value_type_ = ValueType::OBJECT;
 		s_buf_ = value_str;
@@ -77,28 +80,37 @@ inline JsonObject::JsonObject(std::string value_str)
 	else if (-1 != value_str.find('['))
 	{
 		value_type_ = ValueType::ARRAY;
+
 		size_t begin_index(value_str.find("[")), last_index(value_str.find_last_of("]"));
 		int l_index = begin_index+1,r_index = begin_index;
+
+		bool is_end(false);
+
 		while(true)
 		{
+
 			r_index = value_str.find(",", l_index);
 			if(r_index == -1)
 			{
-				break;
+
+				r_index = last_index;
+				is_end = true;
 			}
-			if(0<value_str.find("[")<r_index || 0<value_str.find("{")<r_index)
-			{
-				//element may be array or object
 
-
-				if(value_str.find("{")<value_str.find("["))
+				if (-1<value_str.find("[")<r_index)
 				{
-					
+					//element may be array 
+					array_value_.push_back(JsonObject(value_str.substr(value_str.find("[") + 1, value_str.find_last_of("]") - 1)));
+				}
+				else
+				{
+					array_value_.push_back(JsonObject(value_str.substr(l_index, r_index)));
 				}
 
-			}else
+			l_index = r_index;
+			if(is_end)
 			{
-				array_value_.push_back(JsonObject(value_str.substr(l_index, r_index)));
+				break;
 			}
 
 		}
