@@ -17,8 +17,7 @@ int main()
 
 	fr.test();
 
-	
-	
+
 	//JsonCoder jc("{\"number\":1,\"rray\":[],\"null\":null,\"string\":\"leo108\",\"boolean\":true,\"obj\":{},\"level1\":{\"level2\":{\"level3\":{\"level4\":{\"level5\":{\"level6\":{\"level7\":{\"level8\":{}}}}}}}}}");
 
 	/*JsonCoder
@@ -27,12 +26,7 @@ int main()
 	jc.test();*/
 
 	JsonObject job(fr.GetString());
-
-	JsonObject tmp_j = job["array"];
 	
-	std::cout << job["objectarray"][2]["a"].AsString() << std::endl;
-	
-
 	getchar();
 
 	return 0;
