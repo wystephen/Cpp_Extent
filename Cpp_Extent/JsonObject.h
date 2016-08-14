@@ -87,14 +87,18 @@ inline JsonObject::JsonObject(std::string value_str)
 		size_t begin_index(value_str.find("[")), last_index(value_str.find_last_of("]"));
 		int l_index = begin_index + 1, r_index = begin_index;
 
-		bool is_object(false);
-		bool is_array(false);
+		bool is_object(false);//element is object
+		bool is_array(false);//element is array.
 
 		bool is_end(false);
 
 		while (true)
 		{
-			r_index = value_str.find(",", l_index + 1);
+			if(l_index+1 >= value_str.size())
+			{
+				break;
+			}
+			r_index = value_str.find(",", l_index+1 );
 			if (r_index == -1)
 			{
 				r_index = last_index;
