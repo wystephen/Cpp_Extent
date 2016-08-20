@@ -94,6 +94,7 @@ inline JsonObject::JsonObject(std::string value_str)
 
 		while (true)
 		{
+			//TODO:Some error(out range reference of a string) in here.
 			if(l_index+1 >= value_str.size())
 			{
 				break;
@@ -101,7 +102,7 @@ inline JsonObject::JsonObject(std::string value_str)
 			r_index = value_str.find(",", l_index+1 );
 			if (r_index == -1)
 			{
-				r_index = last_index;
+				r_index = last_index-1;
 				is_end = true;
 			}
 
