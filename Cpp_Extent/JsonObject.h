@@ -11,6 +11,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#define ISDEBUG true
+#define DEBUGSHOW(a) if(ISDEBUG) std::cout << a << std::endl;
+
 
 enum ValueType
 {
@@ -64,6 +67,7 @@ public:
 inline JsonObject::JsonObject(std::string value_str)
 {
 	str_debug_ = value_str;
+	std::cout << value_str << std::endl;
 	if (-1 != value_str.find('{') && (value_str.find("{") < value_str.find('[') || value_str.find("[") < 0))
 	{
 		value_type_ = ValueType::OBJECT;
@@ -84,127 +88,10 @@ inline JsonObject::JsonObject(std::string value_str)
 	{
 		value_type_ = ValueType::ARRAY;
 
-		size_t begin_index(value_str.find("[")), last_index(value_str.find_last_of("]"));
-		int l_index = begin_index + 1, r_index = begin_index;
-
-		bool is_object(false);//element is object
-		bool is_array(false);//element is array.
-
-		bool is_end(false);
-
-		while (true)
-		{
-			//TODO:Some error(out range reference of a string) in here.
-			if(l_index+1 >= value_str.size())
-			{
-				break;
-			}
-			r_index = value_str.find(",", l_index+1 );
-			if (r_index == -1)
-			{
-				r_index = last_index-1;
-				is_end = true;
-			}
+		//TODO:rewrite this function.
 
 
-			if (!is_object && !is_array)
-			{
-				if (-1 < value_str.find("[", l_index) && -1 < value_str.find("{", l_index))
-				{
-					//TODO:ADD function to element which value type is object or array.
-					if (value_str.find("[", l_index) < value_str.find("{", l_index))
-					{
-						is_array = true;
-					}
-					else
-					{
-						is_object = true;
-					}
-				}
-				else if (-1 < value_str.find("[", l_index) && !(-1 < value_str.find("{", l_index)))
-				{
-					is_array = true;
-				}
-				else if (!(-1 < value_str.find("[", l_index)) && -1 < value_str.find("{", l_index))
-				{
-					is_object = true;
-				}
-			}
 
-
-			if (is_array)
-			{
-				l_index = value_str.find('[', l_index);
-
-				int tmp_index(l_index + 1);
-				std::vector<int> tmp_stack;
-				tmp_stack.push_back(tmp_index);
-
-				while (true)
-				{
-					if (value_str.at(tmp_index) == '[')
-					{
-						tmp_stack.push_back(tmp_index);
-					}
-					else if (value_str.at(tmp_index) == ']')
-					{
-						tmp_stack.pop_back();
-					}
-					if (tmp_stack.size() == 0)
-					{
-						r_index = tmp_index;
-						break;
-					}
-					++tmp_index;
-				}
-				array_value_.push_back(JsonObject(value_str.substr(l_index, r_index)));
-				last_index = r_index;
-			}
-			else if (is_object)
-			{
-				l_index = value_str.find('{', l_index+1);
-			
-
-				int tmp_index(l_index +1);
-				std::vector<int> tmp_stack;
-				tmp_stack.push_back(tmp_index);
-
-				while (true)
-				{
-					if (tmp_index >= value_str.size())
-					{
-						std::cout << "ERROR :index is out of range!" << std::endl;
-					}
-					if (value_str.at(tmp_index) == '{')
-					{
-						tmp_stack.push_back(tmp_index);
-					}
-					else if (value_str.at(tmp_index) == '}')
-					{
-						tmp_stack.pop_back();
-					}
-					if (tmp_stack.size() == 0)
-					{
-						r_index = tmp_index;
-						break;
-					}
-					++tmp_index;
-				}
-				array_value_.push_back(JsonObject(value_str.substr(l_index, r_index)));
-				last_index = r_index;
-			}
-			else
-			{
-				array_value_.push_back(JsonObject(value_str.substr(l_index, r_index)));
-				last_index = r_index;
-			}
-
-			l_index = r_index;
-			if (is_end)
-			{
-				break;
-			}
-		}
 	}
 	else if (-1 != value_str.find("\""))
 	{
