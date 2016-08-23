@@ -67,15 +67,22 @@ public:
 inline JsonObject::JsonObject(std::string value_str)
 {
 	str_debug_ = value_str;
-	std::cout << value_str << std::endl;
+	//std::cout << value_str << std::endl;
 	if (-1 != value_str.find('{') && (value_str.find("{") < value_str.find('[') || value_str.find("[") < 0))
 	{
+
 		value_type_ = ValueType::OBJECT;
-		s_buf_ = value_str;
+		//s_buf_ = value_str.substr(1,value_str.size()-1);
+
+		s_buf_ = value_str;//
+		
+		
 
 		ClearString();
 		Decoder();
 
+		std::cout << "OBJECT: " << value_str << std::endl;
+		
 		for (std::map<std::string, std::string>::iterator it = content_map_.begin();
 		     it != content_map_.end(); ++it)
 		{
@@ -88,6 +95,8 @@ inline JsonObject::JsonObject(std::string value_str)
 	{
 		value_type_ = ValueType::ARRAY;
 
+		std::cout << "ARRAY: " << value_str << std::endl;
+
 		//TODO:rewrite this function.
 
 
@@ -95,6 +104,7 @@ inline JsonObject::JsonObject(std::string value_str)
 	}
 	else if (-1 != value_str.find("\""))
 	{
+		std::cout << "STRING: " << value_str << std::endl;
 		//value type is string , save value delete "\"".
 		value_type_ = ValueType::STRING;
 		size_t begin_index = value_str.find("\"");
@@ -105,32 +115,38 @@ inline JsonObject::JsonObject(std::string value_str)
 	}
 	else if (-1 != value_str.find("true"))
 	{
+		std::cout << "BOOL: " << value_str << std::endl;
 		value_type_ = ValueType::BOOL;
 
 		bool_value_ = true;
 	}
 	else if (-1 != value_str.find("false"))
 	{
+		std::cout << "BOOL: " << value_str << std::endl;
 		value_type_ = ValueType::BOOL;
 
 		bool_value_ = false;
 	}
 	else if (-1 != value_str.find("null"))
 	{
+		std::cout << "NULL: " << value_str << std::endl;
 		value_type_ = ValueType::ISNULL;
 	}
 	else if (-1 != value_str.find("."))
 	{
+		std::cout << "DOUBLE: " << value_str << std::endl;
 		value_type_ = ValueType::DOUBLE;
 		double_value_ = atof(value_str.c_str());
 	}
 	else if (-1 != value_str.find("e"))
 	{
+		std::cout << "DOUBLE: " << value_str << std::endl;
 		value_type_ = ValueType::DOUBLE;
 		double_value_ = atof(value_str.c_str());
 	}
 	else
 	{
+		std::cout << "INT: " << value_str << std::endl;
 		value_type_ = ValueType::INT;
 		int_value_ = atoi(value_str.c_str());
 	}

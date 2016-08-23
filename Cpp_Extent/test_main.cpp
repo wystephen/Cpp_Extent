@@ -26,6 +26,8 @@ int main()
 	jc.test();*/
 
 	JsonObject job(fr.GetString());
+
+	std::cout << "end" << std::endl;
 	
 	getchar();
 
