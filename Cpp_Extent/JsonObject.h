@@ -62,6 +62,8 @@ public:
 	JsonObject operator[](std::string key);
 
 	JsonObject operator[](int index);
+
+
 };
 
 inline JsonObject::JsonObject(std::string value_str)
@@ -99,6 +101,41 @@ inline JsonObject::JsonObject(std::string value_str)
 
 		//TODO:rewrite this function.
 
+		bool is_array(false), is_object(false);
+		if(value_str.find('[')==0)
+		{
+			is_array = true;
+		}
+		if(value_str.find('{') == 0)
+		{
+			is_object == true;
+		}
+		int index(0);
+
+		while(true)
+		{
+			int last(0);
+			if(is_array)
+			{
+				last = StrInPairs('[', ']', value_str, index);
+			}
+			else if(is_object)
+			{
+				last = StrInPairs('{', '}', value_str, index);
+			}else
+			{
+				last = value_str.find(',', index) - 1;
+				if(last < 0)
+				{
+					last = value_str.size() - 1;
+				}
+			}
+
+			array_value_.push_back(JsonObject(value_str.substr(index, last)));
+			index = last + 1;
+
+		}
+		
 
 
 	}
@@ -224,3 +261,6 @@ inline JsonObject JsonObject::operator[](int index)
 		return JsonObject();
 	}
 }
+
+
+

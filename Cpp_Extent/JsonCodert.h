@@ -31,6 +31,10 @@ protected:
 	bool ValueDecoder(std::string value_str);
 
 	std::string s_buf_;
+
+
+	int StrInPairs(char left_key, char right_key, std::string src_string,int begin_index);
+
 };
 
 inline JsonCoder::JsonCoder()
@@ -97,7 +101,8 @@ inline bool JsonCoder::Decoder()
 			}
 
 
-			if (s_buf_.find('[', comma_index ) < tmp_comma_index)//有子结构存在
+			if (s_buf_.find('[', comma_index ) < tmp_comma_index &&
+				(s_buf_.find('{', comma_index + 1) > s_buf_.find('[', comma_index + 1) || s_buf_.find('{', comma_index + 1)<0))//有子结构存在
 			{
 				std::vector<int> pair_stack;
 				pair_stack.push_back(s_buf_.find('[', comma_index + 1));
@@ -135,7 +140,8 @@ inline bool JsonCoder::Decoder()
 				tmp_comma_index = s_buf_.find('}', comma_index + 1);
 			}
 
-			if (s_buf_.find('{', comma_index + 1) < tmp_comma_index)//有子结构存在
+			if (s_buf_.find('{', comma_index + 1) < tmp_comma_index &&
+				(s_buf_.find('{', comma_index + 1) < s_buf_.find('[', comma_index + 1)|| s_buf_.find('[', comma_index + 1)<0))//有子结构存在
 			{
 				std::vector<int> pair_stack;
 				pair_stack.push_back(s_buf_.find('{', comma_index + 1));
@@ -237,6 +243,40 @@ inline bool JsonCoder::ValueDecoder(std::string value_str)
 		if (a < 1.0)
 		{
 			std::cerr << "error:'" << a << std::endl;
+		}
+	}
+}
+
+/*
+Find string in bracket pair or quotation mark.
+*/
+inline int JsonCoder::StrInPairs(char left_key, char right_key, std::string src_string, int begin_index)
+{
+
+	std::vector<int> tmp_stack;
+	int tmp_index(begin_index);
+	if(src_string[tmp_index] == left_key)
+	{
+		tmp_stack.push_back(tmp_index);
+	}else
+	{
+		std::cout << "Some error in StrInPairs function" << std::endl;
+	}
+	while(true)
+	{
+		++tmp_index;
+		if(src_string[tmp_index] == left_key)
+		{
+			tmp_stack.push_back(tmp_index);
+		}
+
+		if(src_string[tmp_index] == right_key)
+		{
+			tmp_stack.pop_back();
+		}
+		if(tmp_stack.size()==0)
+		{
+			return tmp_index;
 		}
 	}
 }
