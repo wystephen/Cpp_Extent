@@ -15,23 +15,15 @@
         "e": "f"
 		},
 	"objectarray":[
-	
-	"object1": {
-        "a": "bb",
-        "c": "d",
-        "e": "f"
-    },
-	"object2": {
-        "a": "bbb",
-        "c": "d",
-        "e": "f"
-    },
-	"object3": {
-        "a": "bbbb",
-        "c": "d",
-        "e": "f"
-    }
-	]
+		"oa1":{
+			"oa11":1,
+			"oa12":2
+		},
+		"oa2":{
+			"oa21":21,
+			"oa22":22
+		}
+	],
     "boolean": true,
     "null": null,
     "number": 123,
