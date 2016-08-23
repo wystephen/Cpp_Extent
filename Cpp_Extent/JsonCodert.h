@@ -91,8 +91,13 @@ inline bool JsonCoder::Decoder()
 		{
 			tmp_comma_index = s_buf_.find(',', 1 + comma_index);
 
+			if(tmp_comma_index == -1)
+			{
+				tmp_comma_index = s_buf_.size() - 1;
+			}
 
-			if (s_buf_.find('[', comma_index + 1) < tmp_comma_index)//有子结构存在
+
+			if (s_buf_.find('[', comma_index ) < tmp_comma_index)//有子结构存在
 			{
 				std::vector<int> pair_stack;
 				pair_stack.push_back(s_buf_.find('[', comma_index + 1));
