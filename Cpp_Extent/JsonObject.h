@@ -102,13 +102,13 @@ inline JsonObject::JsonObject(std::string value_str)
 		//TODO:rewrite this function.
 
 		bool is_array(false), is_object(false);
-		if(value_str.find('[')==0)
+		if(value_str.find('[',1)==1)
 		{
 			is_array = true;
 		}
-		if(value_str.find('{') == 0)
+		if(value_str.find('{',1) == 1)
 		{
-			is_object == true;
+			is_object = true;
 		}
 		int index(0);
 
@@ -130,7 +130,7 @@ inline JsonObject::JsonObject(std::string value_str)
 					last = value_str.size() - 1;
 				}
 			}
-
+			std::cout << index << "   " << last << "  " << value_str.size() << "   " <<  value_str.substr(index, last) << std::endl;
 			array_value_.push_back(JsonObject(value_str.substr(index, last)));
 			index = last + 1;
 
