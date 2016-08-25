@@ -105,12 +105,14 @@ inline JsonObject::JsonObject(std::string value_str)
 		if(value_str.find('[',1)==1)
 		{
 			is_array = true;
+			std::cout << "is_array" << std::endl;
 		}
 		if(value_str.find('{',1) == 1)
 		{
 			is_object = true;
+			std::cout << "is_object" << std::endl;
 		}
-		int index(0);
+		int index(1);
 
 		while(true)
 		{
@@ -124,13 +126,18 @@ inline JsonObject::JsonObject(std::string value_str)
 				last = StrInPairs('{', '}', value_str, index);
 			}else
 			{
+
+				//TODO:Error in here.
 				last = value_str.find(',', index) - 1;
 				if(last < 0)
 				{
 					last = value_str.size() - 1;
+					std::cout << index << "   " << last << "  " << value_str.size() << "   " << value_str.substr(index, last) << std::endl;
+					array_value_.push_back(JsonObject(value_str.substr(index, last)));
+					break;
 				}
 			}
-			std::cout << index << "   " << last << "  " << value_str.size() << "   " <<  value_str.substr(index, last) << std::endl;
+			std::cout << index << "   " << last << "  " << value_str.size() << "   " <<  value_str.substr(index, last+1) << std::endl;
 			array_value_.push_back(JsonObject(value_str.substr(index, last)));
 			index = last + 1;
 
