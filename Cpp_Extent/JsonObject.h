@@ -99,8 +99,8 @@ inline JsonObject::JsonObject(std::string value_str)
 
 		std::cout << "ARRAY: " << value_str << std::endl;
 
-		//TODO:rewrite this function.
-
+//		//TODO:rewrite this function.
+//
 //		bool is_array(false), is_object(false);
 //		if(value_str.find('[',1)==1)
 //		{
@@ -133,22 +133,24 @@ inline JsonObject::JsonObject(std::string value_str)
 //				{
 //					last = value_str.size() - 1;
 //					std::cout << index << "   " << last << "  " << value_str.size() << "   " << value_str.substr(index, last) << std::endl;
-//					array_value_.push_back(JsonObject(value_str.substr(index, last)));
+//					array_value_.push_back(JsonObject(value_str.substr(index, last-index)));
 //					break;
 //				}
 //			}
 //			std::cout << index << "   " << last << "  " << value_str.size() << "   " <<  value_str.substr(index, last+1) << std::endl;
-//			array_value_.push_back(JsonObject(value_str.substr(index, last)));
+//			array_value_.push_back(JsonObject(value_str.substr(index, last-index)));
 //			index = last + 1;
 //
 //		}
+
+        //
 		if(value_str[1] == '[')
 		{
 			std::cout << "elements in array is array." << std::endl;
-		}else if(value_str == '{')
+		}else if(value_str[1] == '{')
 		{
 			std::cout << "element in array is object" << std::endl;
-		}else if(value_str_ == "\""){
+		}else if(value_str[1] == '\"'){
 			std::cout << "element in array is string" << std::endl;
 
 			//find "\",\"" in string.
@@ -157,6 +159,7 @@ inline JsonObject::JsonObject(std::string value_str)
 
 			int l_index(1);
 			int r_index(0);
+            bool needbreak(false);
 			while(true)
 			{
 				//if(r_index == 0)
@@ -165,9 +168,17 @@ inline JsonObject::JsonObject(std::string value_str)
 				}
 				if(r_index <0)
 				{
-					r_index = value_str.size() -2;
+
+					r_index = value_str.size() -1;
+
+                    needbreak = true;
 				}
-				array_value_.push_back(JsonObject(value_type_.substr))
+				array_value_.push_back(JsonObject(value_str.substr(l_index,r_index-l_index)));
+                l_index = r_index+1;
+                if(needbreak)
+                {
+                    break;
+                }
 
 			}
 
