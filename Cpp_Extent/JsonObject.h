@@ -101,48 +101,77 @@ inline JsonObject::JsonObject(std::string value_str)
 
 		//TODO:rewrite this function.
 
-		bool is_array(false), is_object(false);
-		if(value_str.find('[',1)==1)
+//		bool is_array(false), is_object(false);
+//		if(value_str.find('[',1)==1)
+//		{
+//			is_array = true;
+//			std::cout << "is_array" << std::endl;
+//		}
+//		if(value_str.find('{',1) == 1)
+//		{
+//			is_object = true;
+//			std::cout << "is_object" << std::endl;
+//		}
+//		int index(1);
+//
+//		while(true)
+//		{
+//			int last(0);
+//			if(is_array)
+//			{
+//				last = StrInPairs('[', ']', value_str, index);
+//			}
+//			else if(is_object)
+//			{
+//				last = StrInPairs('{', '}', value_str, index);
+//			}else
+//			{
+//
+//				//TODO:Error in here.
+//				last = value_str.find(',', index) - 1;
+//				if(last < 0)
+//				{
+//					last = value_str.size() - 1;
+//					std::cout << index << "   " << last << "  " << value_str.size() << "   " << value_str.substr(index, last) << std::endl;
+//					array_value_.push_back(JsonObject(value_str.substr(index, last)));
+//					break;
+//				}
+//			}
+//			std::cout << index << "   " << last << "  " << value_str.size() << "   " <<  value_str.substr(index, last+1) << std::endl;
+//			array_value_.push_back(JsonObject(value_str.substr(index, last)));
+//			index = last + 1;
+//
+//		}
+		if(value_str[1] == '[')
 		{
-			is_array = true;
-			std::cout << "is_array" << std::endl;
-		}
-		if(value_str.find('{',1) == 1)
+			std::cout << "elements in array is array." << std::endl;
+		}else if(value_str == '{')
 		{
-			is_object = true;
-			std::cout << "is_object" << std::endl;
-		}
-		int index(1);
+			std::cout << "element in array is object" << std::endl;
+		}else if(value_str_ == "\""){
+			std::cout << "element in array is string" << std::endl;
 
-		while(true)
-		{
-			int last(0);
-			if(is_array)
-			{
-				last = StrInPairs('[', ']', value_str, index);
-			}
-			else if(is_object)
-			{
-				last = StrInPairs('{', '}', value_str, index);
-			}else
-			{
+			//find "\",\"" in string.
+		}else{
+			std::cout << "element in array is value." << std::endl;
 
-				//TODO:Error in here.
-				last = value_str.find(',', index) - 1;
-				if(last < 0)
+			int l_index(1);
+			int r_index(0);
+			while(true)
+			{
+				//if(r_index == 0)
 				{
-					last = value_str.size() - 1;
-					std::cout << index << "   " << last << "  " << value_str.size() << "   " << value_str.substr(index, last) << std::endl;
-					array_value_.push_back(JsonObject(value_str.substr(index, last)));
-					break;
+					r_index = value_str.find(",",l_index);
 				}
+				if(r_index <0)
+				{
+					r_index = value_str.size() -2;
+				}
+				array_value_.push_back(JsonObject(value_type_.substr))
+
 			}
-			std::cout << index << "   " << last << "  " << value_str.size() << "   " <<  value_str.substr(index, last+1) << std::endl;
-			array_value_.push_back(JsonObject(value_str.substr(index, last)));
-			index = last + 1;
 
 		}
-		
 
 
 	}
