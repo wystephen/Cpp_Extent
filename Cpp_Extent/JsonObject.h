@@ -145,13 +145,90 @@ inline JsonObject::JsonObject(std::string value_str)
 		if(value_str[1] == '[')
 		{
 			std::cout << "elements in array is array." << std::endl;
-		}else if(value_str[1] == '{')
+
+            int l_index(1);
+            int r_index(0);
+            bool needbreak(false);
+            while(true)
+            {
+                r_index = StrInPairs('[',']',value_str,l_index);
+                if(r_index<0)
+                {
+                    r_index = value_str.size()-1;
+                    needbreak = true;
+                }
+
+                array_value_.push_back(JsonObject(value_str.substr(l_index,r_index-l_index+1)));
+                l_index = r_index+2;
+                if(needbreak)
+                {
+                    break;
+                }
+                if(r_index == value_str.size()-2)
+                {
+                    break;
+                }
+            }
+
+
+        }else if(value_str[1] == '{')
 		{
 			std::cout << "element in array is object" << std::endl;
+
+            int l_index(1);
+            int r_index(0);
+            bool needbreak(false);
+            while(true)
+            {
+                r_index = StrInPairs('{','}',value_str,l_index);
+                if(r_index<0)
+                {
+                    r_index = value_str.size()-1;
+                    needbreak = true;
+                }
+
+                array_value_.push_back(JsonObject(value_str.substr(l_index,r_index-l_index+1)));
+                l_index = r_index+2;
+                if(needbreak)
+                {
+                    break;
+                }
+                if(r_index == value_str.size()-2)
+                {
+                    break;
+                }
+            }
+
+
 		}else if(value_str[1] == '\"'){
 			std::cout << "element in array is string" << std::endl;
 
 			//find "\",\"" in string.
+            int l_index(1);
+            int r_index(0);
+            bool needbreak(false);
+            if(value_str.find("\",",0)>-1)
+            {
+                std::cout << "NOTICE:There are some case not acheive in this code!(\"in string)" << std::endl;
+                std::cerr << "NOTICE:There are some case not acheive in this code!(\"in string)" << std::endl;
+            }
+            while(true)
+            {
+                r_index = value_str.find("\",",l_index);
+                //TODO:Add code to string include value "\"".
+                if(r_index < 0 )
+                {
+                    r_index = value_str.size()-2;
+                    needbreak = true;
+                }
+                array_value_.push_back(JsonObject(value_str.substr(l_index,r_index-l_index+1)));
+                l_index = r_index +2;
+                if(needbreak)
+                {
+                    break;
+                }
+
+            }
 		}else{
 			std::cout << "element in array is value." << std::endl;
 
