@@ -4,6 +4,8 @@
 #include <algorithm>
 
 
+#include <random>
+
 #include "FileReader.h"
 #include "JsonCodert.h"
 #include "JsonObject.h"
@@ -17,18 +19,35 @@ int main()
 
 	fr.test();
 
+    std::ofstream of("test.csv");
 
-	//JsonCoder jc("{\"number\":1,\"rray\":[],\"null\":null,\"string\":\"leo108\",\"boolean\":true,\"obj\":{},\"level1\":{\"level2\":{\"level3\":{\"level4\":{\"level5\":{\"level6\":{\"level7\":{\"level8\":{}}}}}}}}}");
+    std::uniform_real_distribution<double> rd;
 
-	/*JsonCoder
-		jc(fr.GetString());
+    std::default_random_engine e;
 
-	jc.test();*/
+    int rows(100);
+    int cols(100);
 
-	JsonObject job(fr.GetString());
-    std::cout << job["objectarray"][0]["oa1"]["oa11"].AsString() << std::endl;
+    for(int i_x(0);i_x < rows;++i_x)
+    {
+        for(int i_y(0);i_y < cols;++i_y)
+        {
+            of << rd(e) ;
+            if(i_y != cols-1)
+            {
+                of<<",";
+            }else{
+                if(i_x != rows-1)
+                {
+                    of<<std::endl;
+                }
 
-	std::cout << "end" << std::endl;
+            }
+        }
+    }
+
+    of.close();
+
 	
 	getchar();
 
