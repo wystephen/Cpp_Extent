@@ -26,6 +26,7 @@ int main()
 	jc.test();*/
 
 	JsonObject job(fr.GetString());
+    std::cout << job["objectarray"][0]["oa1"]["oa11"].AsString() << std::endl;
 
 	std::cout << "end" << std::endl;
 	

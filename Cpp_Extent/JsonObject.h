@@ -319,8 +319,7 @@ inline std::string JsonObject::AsString() const
 	}
 	else
 	{
-		//TODO:ADD transform between diffirent value type.
-		return std::string("");
+		std::cout << str_debug_ << std::endl;
 	}
 }
 
@@ -329,6 +328,10 @@ inline int JsonObject::AsInt() const
 	if (value_type_ == ValueType::INT)
 	{
 		return int_value_;
+	}else if(value_type_ == ValueType::DOUBLE)
+	{
+		std::cout << "Convert from double to int will loss information!" << std::endl;
+		return int(double_value_);
 	}
 	else
 	{
@@ -341,8 +344,9 @@ inline double JsonObject::AsDouble() const
 	if (value_type_ == ValueType::DOUBLE)
 	{
 		return double_value_;
-	}
-	else
+	}else if(value_type_ == ValueType::INT){
+		return double(int_value_);
+	} else
 	{
 		return 0;
 	}
