@@ -15,14 +15,14 @@
         "e": "f"
 		},
 	"objectarray":[
-		"oa1":{
+		{"oa1":{
 			"oa11":1,
 			"oa12":2
-		},
-		"oa2":{
+		}},
+		{"oa2":{
 			"oa21":21,
 			"oa22":22
-		}
+		}}
 	],
     "boolean": true,
     "null": null,

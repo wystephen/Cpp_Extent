@@ -77,8 +77,6 @@ inline JsonObject::JsonObject(std::string value_str)
 		//s_buf_ = value_str.substr(1,value_str.size()-1);
 
 		s_buf_ = value_str;//
-		
-		
 
 		ClearString();
 		Decoder();
@@ -179,7 +177,6 @@ inline JsonObject::JsonObject(std::string value_str)
                 {
                     break;
                 }
-                
 
 			}
 
