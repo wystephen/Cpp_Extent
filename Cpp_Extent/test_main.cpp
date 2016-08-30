@@ -15,38 +15,19 @@ int main()
 	//JsonObject job;
 	//JsonObject t = job["aaa"];
 	
-	FileReader fr("jsontest.txt");
+	FileReader fr("test.csv");
 
 	fr.test();
 
-    std::ofstream of("test.csv");
 
-    std::uniform_real_distribution<double> rd;
 
-    std::default_random_engine e;
+    //Standard radom engine.
+//    std::uniform_real_distribution<double> rd;
+//
+//    std::default_random_engine e;
+    //std::cout << rd(e) << std::endl;
 
-    int rows(100);
-    int cols(100);
 
-    for(int i_x(0);i_x < rows;++i_x)
-    {
-        for(int i_y(0);i_y < cols;++i_y)
-        {
-            of << rd(e) ;
-            if(i_y != cols-1)
-            {
-                of<<",";
-            }else{
-                if(i_x != rows-1)
-                {
-                    of<<std::endl;
-                }
-
-            }
-        }
-    }
-
-    of.close();
 
 	
 	getchar();
