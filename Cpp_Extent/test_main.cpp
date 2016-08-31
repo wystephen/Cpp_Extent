@@ -9,23 +9,18 @@
 #include "FileReader.h"
 #include "JsonCodert.h"
 #include "JsonObject.h"
+#include "CSVReader.h"
 
 int main()
 {
 	//JsonObject job;
 	//JsonObject t = job["aaa"];
 	
-	FileReader fr("test.csv");
+	CSVReader fr(std::string("test.csv"));
 
-	fr.test();
+	fr.test1();
 
 
-
-    //Standard radom engine.
-//    std::uniform_real_distribution<double> rd;
-//
-//    std::default_random_engine e;
-    //std::cout << rd(e) << std::endl;
 
 
 
