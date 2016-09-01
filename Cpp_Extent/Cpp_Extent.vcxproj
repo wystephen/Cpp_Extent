@@ -142,9 +142,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="CSVReader.h" />
     <ClInclude Include="FileReader.h" />
     <ClInclude Include="JsonCodert.h" />
     <ClInclude Include="JsonObject.h" />
+    <ClInclude Include="matrix.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="test_main.cpp" />

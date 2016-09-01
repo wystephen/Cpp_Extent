@@ -29,7 +29,7 @@ public:
         cols_ = cols;
     }
 
-    virtual void SetValue(T &value);
+    virtual void SetValue(T *value);
 
     void test(){
         std::cout<< "second value is :" << *(buf_ + 2 ) << std::endl;
@@ -47,7 +47,7 @@ private:
 
 };
 template <class T>
-void Matrix::SetValue(T &value) {
+void Matrix<T>::SetValue(T *value) {
     if(rows_*cols_  == 0)
     {
         std::cout << "ERROR,matrix size is:" << rows_ << " * " << cols_ << std::endl;
