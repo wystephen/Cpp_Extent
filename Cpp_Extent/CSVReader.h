@@ -77,11 +77,50 @@ void CSVReader::test1() {
 
 	*m_(1, 2) = 2;
 	std::cout << " ok " << *m_(1, 2) << std::endl;
+	LoadData();
+	std::cout << " ok " << *m_(1, 2) << std::endl;
+
 	
 }
 
 bool CSVReader::LoadData() {
 
+	if(rows_*cols_ == 0)
+	{
+		MatSize();
+	}
+	if(file_size_ == 0)
+	{
+		MYERROR("FILE IS EMPTY!")
+	}
+	std::string tmp_str(file_buf_);
+
+	int the_row(0), the_col(0);
+
+	int l_index(0), r_index(0);
+
+	for(int index(0);index < tmp_str.size();++index)
+	{
+		if(tmp_str[index]==',' || tmp_str[index] == '\n')
+		{
+			r_index = index;
+			*m_(the_row, the_col) = atof(tmp_str.substr(l_index, r_index - l_index).c_str());
+			if(tmp_str[index] == '\n')
+			{
+				++the_row;
+				the_col = 0;
+			}else
+			{
+				++the_col;
+			}
+			if(the_row == rows_-1 && the_col == cols_ -1)
+			{
+				*m_(the_row, the_col + 1) = atof(tmp_str.substr(r_index + 1, file_size_ - r_index - 1).c_str());
+				break;
+			}
+			l_index = r_index + 1;
+		}
+	}
 	
     return false;
 }

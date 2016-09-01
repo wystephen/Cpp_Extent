@@ -25,7 +25,7 @@ public:
 
 	~Matrix<T>()
 	{
-		delete[] buf_;
+		/*delete[] buf_;*/
 	}
 
     void set_size(int rows,int cols)
