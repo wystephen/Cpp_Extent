@@ -147,6 +147,7 @@
     <ClInclude Include="JsonCodert.h" />
     <ClInclude Include="JsonObject.h" />
     <ClInclude Include="matrix.h" />
+    <ClInclude Include="MyError.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="test_main.cpp" />

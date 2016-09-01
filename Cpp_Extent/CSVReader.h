@@ -7,10 +7,17 @@
 
 #include "Matrix.h"
 
+#include "MyError.h"
+
 class CSVReader : public FileReader {
 public:
 
     CSVReader() = default;
+
+	~CSVReader()
+	{
+
+	}
 
     CSVReader(std::string file_name) : FileReader(file_name) {}
 
@@ -65,11 +72,17 @@ bool CSVReader::MatSize() {
 void CSVReader::test1() {
     MatSize();
     std::cout << " rows : " << rows_ << "  cols : " << rows_ << std::endl;
+	
+	m_.set_size(rows_, cols_);
 
+	*m_(1, 2) = 2;
+	std::cout << " ok " << *m_(1, 2) << std::endl;
+	
 }
 
 bool CSVReader::LoadData() {
 
+	
     return false;
 }
 

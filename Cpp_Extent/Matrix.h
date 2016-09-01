@@ -13,7 +13,8 @@ class Matrix
 {
 public:
 
-    Matrix<T>(){}
+
+	Matrix<T>(){}
 
     Matrix<T>(int rows,int cols)
     {
@@ -21,6 +22,11 @@ public:
         rows_ = rows;
         cols_ = cols;
     }
+
+	~Matrix<T>()
+	{
+		delete[] buf_;
+	}
 
     void set_size(int rows,int cols)
     {
@@ -35,13 +41,16 @@ public:
         std::cout<< "second value is :" << *(buf_ + 2 ) << std::endl;
     }
 
+	T* operator()(int a, int b);
+
 
 protected:
 
     int rows_=0;
     int cols_= 0;
-
-    T* buf_;
+	
+	T* buf_;
+    
 
 private:
 
@@ -54,4 +63,10 @@ void Matrix<T>::SetValue(T *value) {
     }
     memcpy(buf_,value,sizeof(T)*rows_*cols_);
 
+}
+
+template <class T>
+T* Matrix<T>::operator()(int a, int b)
+{
+	return (buf_ + a*cols_ + b);
 }

@@ -207,7 +207,7 @@ inline JsonObject::JsonObject(std::string value_str)
             int l_index(1);
             int r_index(0);
             bool needbreak(false);
-            if(value_str.find("\",",0)>-1)
+            if(value_str.find("\\\"",0)>-1)
             {
                 std::cout << "NOTICE:There are some case not acheive in this code!(\"in string)" << std::endl;
                 std::cerr << "NOTICE:There are some case not acheive in this code!(\"in string)" << std::endl;
