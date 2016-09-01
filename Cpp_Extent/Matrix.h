@@ -23,6 +23,16 @@ public:
         cols_ = cols;
     }
 
+	Matrix<T>(Matrix m_matrix)
+	{
+		this->rows_ = m_matrix.rows_;
+		this->cols_ = m_matrix.cols_;
+
+		buf_ = new T[rows_*cols_];
+		memcpy(buf_, m_matrix.buf_, sizeof(T)*(rows_ + 1)*(cols_ + 1));
+
+	}
+
 	~Matrix<T>()
 	{
 		/*delete[] buf_;*/
@@ -43,13 +53,16 @@ public:
 
 	T* operator()(int a, int b);
 
+	Matrix operator+(Matrix &b_matrix);
 
-protected:
 
-    int rows_=0;
+	int rows_=0;
     int cols_= 0;
 	
 	T* buf_;
+    
+protected:
+
     
 
 private:
@@ -69,4 +82,22 @@ template <class T>
 T* Matrix<T>::operator()(int a, int b)
 {
 	return (buf_ + a*cols_ + b);
+}
+
+template <class T>
+Matrix<T> Matrix<T>::operator+(Matrix &b_matrix)
+{
+	if(cols_ == b_matrix.cols_ && rows_ == b_matrix.rows_)
+	{
+		Matrix<T> sum_matrix(cols_, rows_);
+		//TODO:parallelization this function.
+		for(int x(0);x<rows_;++x)
+		{
+			for(int y(0);y<cols_;++y)
+			{
+				*sum_matrix(x, y) = *b_matrix(x, y) + *(buf_ + x*cols_ +y);
+			}
+		}
+		return sum_matrix;
+	}
 }
