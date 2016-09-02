@@ -78,12 +78,13 @@ void CSVReader::test1() {
 	*m_(1, 2) = 2;
 	std::cout << " ok " << *m_(1, 2) << std::endl;
 	LoadData();
-	std::cout << " ok " << *m_(1, 2) << std::endl;
+	std::cout << " ok ::" << *m_(1, 2) << std::endl;
 	
-	Matrix<double> tmp_m1(m_), sum_m(m_);
+	Matrix<double> tmp_m1(m_),sum_m(m_);
+	std::cout << "sss" << std::endl;
 	sum_m = tmp_m1 + m_;
 
-	int xx(3), yy(5);
+	int xx(1), yy(2);
 	std::cout << *m_(xx, yy) << "  "<< *tmp_m1(xx, yy) << "  " << *sum_m(xx, yy) << std::endl;
 	
 }

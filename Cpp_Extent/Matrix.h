@@ -23,14 +23,14 @@ public:
         cols_ = cols;
     }
 
-	Matrix<T>(Matrix &m_matrix)
+	Matrix<T>(const Matrix<T> &m_matrix)
 	{
 		this->rows_ = m_matrix.rows_;
 		this->cols_ = m_matrix.cols_;
 
 		buf_ = new T[rows_*cols_];
 		std::cout << "Before copy" << std::endl;
-		memcpy(buf_, m_matrix.buf_, sizeof(T)*(rows_ + 1)*(cols_ + 1));
+		memcpy(buf_, m_matrix.buf_, sizeof(T)*(rows_ )*(cols_ ));
 		std::cout << "After copy" << std::endl;
 	}
 
@@ -56,19 +56,20 @@ public:
 
 	Matrix operator+(Matrix &b_matrix);
 
-	Matrix operator=(Matrix tmp_matrix) {
-		return Matrix<T>(tmp_matrix) ;
-	}
+	//TODO:Why not needn't redefine the operator =?
+	//Matrix operator=(Matrix tmp_matrix) {
+	//	return Matrix<T>(tmp_matrix) ;
+	//}
 
 
 	
     
 protected:
-int rows_=0;
+
+    int rows_=0;
     int cols_= 0;
 	
 	T* buf_;
-    
 
 private:
 
