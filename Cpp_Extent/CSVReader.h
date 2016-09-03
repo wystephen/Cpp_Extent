@@ -89,6 +89,9 @@ void CSVReader::test1() {
 	std::cout << *m_(xx, yy) << "  "<< *tmp_m1(xx, yy) << "  " << *sum_m(xx, yy) << std::endl;
 
 	std::cout << *m_(99, 99) << std::endl;
+	sum_m = tmp_m1 * m_ * 2.0 + 10.0;
+
+	std::cout << *m_(xx, yy) << "  " << *tmp_m1(xx, yy) << "  " << *sum_m(xx, yy) << std::endl;
 	
 }
 

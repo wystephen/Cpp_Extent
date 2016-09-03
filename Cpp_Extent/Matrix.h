@@ -60,7 +60,11 @@ public:
 
 	Matrix operator+(Matrix &b_matrix);
 
+	Matrix operator+(double num);
+
 	Matrix operator*(Matrix &b_matrix);
+
+	Matrix operator*(double num);
 
 	//TODO:Why not needn't redefine the operator =?
 	//Matrix operator=(Matrix tmp_matrix) {
@@ -127,6 +131,19 @@ Matrix<T> Matrix<T>::operator+(Matrix &b_matrix)
 }
 
 template <class T>
+Matrix<T> Matrix<T>::operator+(double num)
+{
+	for(int x(0);x<rows_;++x)
+	{
+		for(int y(0);y<cols_;++y)
+		{
+			*(buf_ + x*cols_ + y) += num;
+		}
+	}
+	return *this;
+}
+
+template <class T>
 Matrix<T> Matrix<T>::operator*(Matrix& b_matrix)
 {
 	if(b_matrix.rows_ != this->rows_)
@@ -156,4 +173,17 @@ Matrix<T> Matrix<T>::operator*(Matrix& b_matrix)
 		}
 	}
 	return mul_matrix;
+}
+
+template <class T>
+Matrix<T> Matrix<T>::operator*(double num)
+{
+	for (int x(0); x<rows_; ++x)
+	{
+		for (int y(0); y<cols_; ++y)
+		{
+			*(buf_ + x*cols_ + y) = *(buf_ + x*cols_ + y) * num;
+		}
+	}
+	return *this;
 }
