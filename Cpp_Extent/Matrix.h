@@ -43,8 +43,13 @@ public:
 		/*delete[] buf_;*/
 	}
 
+	/*Set the size of the matrix,will allocate memory for buf_ base on the size.*/
     void set_size(int rows,int cols)
     {
+		if(rows_*cols_!=0)
+		{
+			delete[] buf_;
+		}
         buf_ = new T[rows*cols];
         rows_=rows;
         cols_ = cols;
@@ -56,14 +61,19 @@ public:
         std::cout<< "second value is :" << *(buf_ + 2 ) << std::endl;
     }
 
+	/*Safe way to get the address of a element in the matrix,return a pointer.*/
 	T* operator()(int a, int b);
 
+	/*Matrix additional operator,two matrix must be same size.*/
 	Matrix operator+(Matrix &b_matrix);
 
+	/*Matrix add a single number,every elements in the matrix add this number.*/
 	Matrix operator+(double num);
 
+	/*Typically Matrix multiply Matrix, first matrix's cols must equal to seconde matrix's rows.*/
 	Matrix operator*(Matrix &b_matrix);
 
+	/*Every elements in the matrix multiply a double value.*/
 	Matrix operator*(double num);
 
 	//TODO:Why not needn't redefine the operator =?
@@ -79,7 +89,7 @@ protected:
     int rows_=0;
     int cols_= 0;
 	
-	T* buf_;
+	T* buf_;//Save the value of the matrix.
 
 private:
 
