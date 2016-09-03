@@ -8,6 +8,10 @@
 
 #include <cstring>
 
+#include <sstream>
+
+#include "MyError.h"
+
 template <class T>
 class Matrix
 {
@@ -29,9 +33,9 @@ public:
 		this->cols_ = m_matrix.cols_;
 
 		buf_ = new T[rows_*cols_];
-		std::cout << "Before copy" << std::endl;
+		//std::cout << "Before copy" << std::endl;
 		memcpy(buf_, m_matrix.buf_, sizeof(T)*(rows_ )*(cols_ ));
-		std::cout << "After copy" << std::endl;
+		//std::cout << "After copy" << std::endl;
 	}
 
 	~Matrix<T>()
@@ -55,6 +59,8 @@ public:
 	T* operator()(int a, int b);
 
 	Matrix operator+(Matrix &b_matrix);
+
+	Matrix operator*(Matrix &b_matrix);
 
 	//TODO:Why not needn't redefine the operator =?
 	//Matrix operator=(Matrix tmp_matrix) {
@@ -87,7 +93,19 @@ void Matrix<T>::SetValue(T *value) {
 template <class T>
 T* Matrix<T>::operator()(int a, int b)
 {
-	return (buf_ + a*cols_ + b);
+	if(a<rows_ && b<cols_)
+	{
+		return (buf_ + a*cols_ + b);
+	}else
+	{
+		MYERROR("Index is over the barder.")
+
+		std::cout << "	rows,		cols	is " << rows_ << " , " << cols_ << std::endl;
+		std::cout << "	index_x,	index_y is " << a << " , " << b << std::endl;
+
+		return (buf_);
+	}
+	
 }
 
 template <class T>
@@ -106,4 +124,36 @@ Matrix<T> Matrix<T>::operator+(Matrix &b_matrix)
 		}
 		return sum_matrix;
 	}
+}
+
+template <class T>
+Matrix<T> Matrix<T>::operator*(Matrix& b_matrix)
+{
+	if(b_matrix.rows_ != this->rows_)
+	{
+		std::stringstream tmpss;
+		tmpss << "Matrix multiply error,first matrix is " << this->rows_ << " x " << this->cols_ << \
+			" and the second one is " << b_matrix.rows_ << " x " << b_matrix.cols_;
+		MYERROR(tmpss.str().c_str())
+
+			return Matrix<T>();
+	}
+
+	//TODO:This segement can be parallelization.
+
+	//TODO:There are another methon to speed up the operator.
+	Matrix<T> mul_matrix(this->rows_, b_matrix.cols_);
+
+	for(int x(0);x<mul_matrix.rows_;++x)
+	{
+		for(int y(0);y<mul_matrix.cols_;++y)
+		{
+			*mul_matrix(x, y) = 0.0;
+			for(int k(0);k<this->cols_;++k)
+			{
+				*mul_matrix(x, y) += *b_matrix(k, y)* (*(buf+ x*cols_ +y));
+			}
+		}
+	}
+	return mul_matrix;
 }

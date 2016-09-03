@@ -69,6 +69,7 @@ bool CSVReader::MatSize() {
     return false;
 }
 
+//Just for test.
 void CSVReader::test1() {
     MatSize();
     std::cout << " rows : " << rows_ << "  cols : " << rows_ << std::endl;
