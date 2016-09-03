@@ -151,7 +151,7 @@ Matrix<T> Matrix<T>::operator*(Matrix& b_matrix)
 			*mul_matrix(x, y) = 0.0;
 			for(int k(0);k<this->cols_;++k)
 			{
-				*mul_matrix(x, y) += *b_matrix(k, y)* (*(buf+ x*cols_ +y));
+				*mul_matrix(x, y) += *b_matrix(k, y)* (*(buf_+ x*cols_ +y));
 			}
 		}
 	}

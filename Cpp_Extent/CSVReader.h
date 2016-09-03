@@ -83,10 +83,12 @@ void CSVReader::test1() {
 	
 	Matrix<double> tmp_m1(m_),sum_m(m_);
 	std::cout << "sss" << std::endl;
-	sum_m = tmp_m1 + m_;
+	sum_m = tmp_m1 * m_;
 
 	int xx(1), yy(2);
 	std::cout << *m_(xx, yy) << "  "<< *tmp_m1(xx, yy) << "  " << *sum_m(xx, yy) << std::endl;
+
+	std::cout << *m_(99, 99) << std::endl;
 	
 }
 
@@ -122,7 +124,7 @@ bool CSVReader::LoadData() {
 			}
 			if(the_row == rows_-1 && the_col == cols_ -1)
 			{
-				*m_(the_row, the_col + 1) = atof(tmp_str.substr(r_index + 1, file_size_ - r_index - 1).c_str());
+				*m_(the_row, the_col ) = atof(tmp_str.substr(r_index + 1, file_size_ - r_index - 1).c_str());
 				break;
 			}
 			l_index = r_index + 1;
