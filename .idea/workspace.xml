@@ -13,9 +13,7 @@
   <component name="ChangeListManager">
     <list default="true" id="7c379ff4-e853-48d8-95da-101f6ab84274" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Cpp_Extent/CSVReader.h" afterPath="$PROJECT_DIR$/Cpp_Extent/CSVReader.h" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Cpp_Extent/Matrix.h" afterPath="$PROJECT_DIR$/Cpp_Extent/Matrix.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Cpp_Extent/test_main.cpp" afterPath="$PROJECT_DIR$/Cpp_Extent/test_main.cpp" />
     </list>
     <ignored path="Cpp_Extent.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -50,12 +48,13 @@
           <file leaf-file-name="Matrix.h" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/Cpp_Extent/Matrix.h">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="392">
-                  <caret line="209" column="5" selection-start-line="209" selection-start-column="5" selection-end-line="209" selection-end-column="5" />
+                <state relative-caret-position="-3190">
+                  <caret line="18" column="1" selection-start-line="18" selection-start-column="1" selection-end-line="18" selection-end-column="1" />
                   <folding>
                     <element signature="e#39#58#0" expanded="true" />
-                    <element signature="e#3805#3814#0" expanded="true" />
-                    <element signature="e#4018#4027#0" expanded="true" />
+                    <element signature="e#152#161#0" expanded="true" />
+                    <element signature="e#3837#3846#0" expanded="true" />
+                    <element signature="e#4050#4059#0" expanded="true" />
                   </folding>
                 </state>
               </provider>
@@ -98,8 +97,8 @@
           <file leaf-file-name="CSVReader.h" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/Cpp_Extent/CSVReader.h">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="100">
-                  <caret line="75" column="0" selection-start-line="75" selection-start-column="0" selection-end-line="75" selection-end-column="0" />
+                <state relative-caret-position="64">
+                  <caret line="73" column="16" selection-start-line="73" selection-start-column="16" selection-end-line="73" selection-end-column="16" />
                   <folding>
                     <element signature="e#39#58#0" expanded="true" />
                   </folding>
@@ -525,7 +524,7 @@
       <workItem from="1472524782631" duration="3112000" />
       <workItem from="1472534277430" duration="6418000" />
       <workItem from="1472620371732" duration="5466000" />
-      <workItem from="1472972115552" duration="1355000" />
+      <workItem from="1472972115552" duration="1622000" />
     </task>
     <task id="LOCAL-00001" summary="Add CMakeLists.txt">
       <created>1470447707062</created>
@@ -632,11 +631,18 @@
       <option name="project" value="LOCAL" />
       <updated>1472627713357</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="Add Matrix.transpot.">
+      <created>1472973488487</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1472973488487</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="22033000" />
+    <option name="totallyTimeSpent" value="22300000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="65" y="24" width="1855" height="1056" extended-state="6" />
@@ -649,7 +655,7 @@
       <window_info id="LuaJ" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32881" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32776618" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32776618" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2498618" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -723,7 +729,8 @@
     <MESSAGE value="pass based test examples." />
     <MESSAGE value="new test.csv." />
     <MESSAGE value="standard random engine in C++ 11,marked." />
-    <option name="LAST_COMMIT_MESSAGE" value="standard random engine in C++ 11,marked." />
+    <MESSAGE value="Add Matrix.transpot." />
+    <option name="LAST_COMMIT_MESSAGE" value="Add Matrix.transpot." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1082,8 +1089,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Cpp_Extent/CSVReader.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="100">
-          <caret line="75" column="0" selection-start-line="75" selection-start-column="0" selection-end-line="75" selection-end-column="0" />
+        <state relative-caret-position="64">
+          <caret line="73" column="16" selection-start-line="73" selection-start-column="16" selection-end-line="73" selection-end-column="16" />
           <folding>
             <element signature="e#39#58#0" expanded="true" />
           </folding>
@@ -1092,12 +1099,13 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Cpp_Extent/Matrix.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="392">
-          <caret line="209" column="5" selection-start-line="209" selection-start-column="5" selection-end-line="209" selection-end-column="5" />
+        <state relative-caret-position="-3190">
+          <caret line="18" column="1" selection-start-line="18" selection-start-column="1" selection-end-line="18" selection-end-column="1" />
           <folding>
             <element signature="e#39#58#0" expanded="true" />
-            <element signature="e#3805#3814#0" expanded="true" />
-            <element signature="e#4018#4027#0" expanded="true" />
+            <element signature="e#152#161#0" expanded="true" />
+            <element signature="e#3837#3846#0" expanded="true" />
+            <element signature="e#4050#4059#0" expanded="true" />
           </folding>
         </state>
       </provider>

@@ -12,6 +12,8 @@
 
 #include "MyError.h"
 
+
+
 template <class T>
 class Matrix
 {
@@ -57,6 +59,7 @@ public:
 
     virtual void SetValue(T *value);
 
+    /*Transport of a matrix*/
     Matrix<T> transport();
 
     void test(){
@@ -204,6 +207,11 @@ Matrix<T> Matrix<T>::operator*(double num)
 
 template <class T>
 Matrix<T> Matrix<T>::transport() {
+
+
+    /*TODO:Use a function for use every element,
+     * and then transport just need change a sigle flag value.
+     * */
     if(cols_*rows_ == 0)
     {
         return Matrix<T>();
