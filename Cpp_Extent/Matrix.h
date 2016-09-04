@@ -38,7 +38,7 @@ public:
 		//std::cout << "After copy" << std::endl;
 	}
 
-	~Matrix<T>()
+	virtual ~Matrix<T>()
 	{
 		/*delete[] buf_;*/
 	}
@@ -48,7 +48,7 @@ public:
     {
 		if(rows_*cols_!=0)
 		{
-			delete[] buf_;
+			delete[] buf_;//delete buf_ is buf_ is exist.
 		}
         buf_ = new T[rows*cols];
         rows_=rows;
