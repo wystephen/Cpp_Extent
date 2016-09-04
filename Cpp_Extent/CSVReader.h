@@ -19,7 +19,9 @@ public:
 
 	}
 
-    CSVReader(std::string file_name) : FileReader(file_name) {}
+    CSVReader(std::string file_name) : FileReader(file_name) {
+		LoadData();
+	}
 
 
     int rows_ = 0;
@@ -71,28 +73,9 @@ bool CSVReader::MatSize() {
 
 //Just for test.
 void CSVReader::test1() {
-    MatSize();
-    std::cout << " rows : " << rows_ << "  cols : " << rows_ << std::endl;
-	
-	m_.set_size(rows_, cols_);
 
-	*m_(1, 2) = 2;
-	std::cout << " ok " << *m_(1, 2) << std::endl;
-	LoadData();
-	std::cout << " ok ::" << *m_(1, 2) << std::endl;
-	
-	Matrix<double> tmp_m1(m_),sum_m(m_);
-	std::cout << "sss" << std::endl;
-	sum_m = tmp_m1 * m_;
-
-	int xx(1), yy(2);
-	std::cout << *m_(xx, yy) << "  "<< *tmp_m1(xx, yy) << "  " << *sum_m(xx, yy) << std::endl;
-
-	std::cout << *m_(99, 99) << std::endl;
-	sum_m = tmp_m1 * m_ * 2.0 + 10.0;
-
-	std::cout << *m_(xx, yy) << "  " << *tmp_m1(xx, yy) << "  " << *sum_m(xx, yy) << std::endl;
-	
+	std::cout << *m_(3,8) << std::endl;
+	std::cout << *m_.transport()(8,3) << std::endl;
 }
 
 bool CSVReader::LoadData() {
@@ -100,6 +83,7 @@ bool CSVReader::LoadData() {
 	if(rows_*cols_ == 0)
 	{
 		MatSize();
+		m_.set_size(rows_,cols_);
 	}
 	if(file_size_ == 0)
 	{

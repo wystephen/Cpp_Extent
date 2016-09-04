@@ -22,8 +22,6 @@ int main()
 
 
 
-
-
 	
 	getchar();
 

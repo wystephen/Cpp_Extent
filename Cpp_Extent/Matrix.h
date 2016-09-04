@@ -57,6 +57,8 @@ public:
 
     virtual void SetValue(T *value);
 
+    Matrix<T> transport();
+
     void test(){
         std::cout<< "second value is :" << *(buf_ + 2 ) << std::endl;
     }
@@ -80,6 +82,8 @@ public:
 	//Matrix operator=(Matrix tmp_matrix) {
 	//	return Matrix<T>(tmp_matrix) ;
 	//}
+
+
 
 
 	
@@ -197,3 +201,32 @@ Matrix<T> Matrix<T>::operator*(double num)
 	}
 	return *this;
 }
+
+template <class T>
+Matrix<T> Matrix<T>::transport() {
+    if(cols_*rows_ == 0)
+    {
+        return Matrix<T>();
+    }
+    T *t (new T[rows_*cols_]);
+    memcpy(t,buf_,sizeof(T)*rows_*cols_);
+    int src_cols(cols_);
+    cols_ = rows_;
+    rows_=src_cols;
+    //delete tmp;
+
+    //transport
+    for(int x(0);x<rows_;++x)
+    {
+        for(int y(0);y<cols_;++y)
+        {
+            *(buf_+x*cols_+y) = *(t+y*src_cols+x);
+        }
+    }
+
+    delete [] t;
+    return *this;
+
+}
+
+
