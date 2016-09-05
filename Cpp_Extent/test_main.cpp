@@ -11,6 +11,8 @@
 #include "JsonObject.h"
 #include "CSVReader.h"
 
+
+
 int main()
 {
 	//JsonObject job;
@@ -19,6 +21,13 @@ int main()
 	CSVReader fr(std::string("test.csv"));
 
 	fr.test1();
+
+	CSVReader magic(std::string("magicmatrix.csv"));
+	Matrix<double> src_m(magic.GetMatrix());
+
+	CSVReader inv(std::string("pinv.csv"));
+	Matrix<double> inv_m(inv.GetMatrix());
+
 
 
 

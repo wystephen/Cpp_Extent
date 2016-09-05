@@ -42,4 +42,12 @@
   <ItemGroup>
     <Text Include="jsontest.txt" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="magicmatrix.csv">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="pinv.csv">
+      <Filter>资源文件</Filter>
+    </None>
+  </ItemGroup>
 </Project>
