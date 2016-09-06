@@ -232,6 +232,8 @@ Matrix<T> Matrix<T>::transport() {
         }
     }
 
+	//Todo:The pesude inverse of the matri.
+
     delete [] t;
     return *this;
 
