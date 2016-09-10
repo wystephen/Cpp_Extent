@@ -144,6 +144,7 @@
   <ItemGroup>
     <ClInclude Include="CSVReader.h" />
     <ClInclude Include="FileReader.h" />
+    <ClInclude Include="FUNCTIONBASE.h" />
     <ClInclude Include="JsonCodert.h" />
     <ClInclude Include="JsonObject.h" />
     <ClInclude Include="matrix.h" />
@@ -151,6 +152,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="test_main.cpp" />
+    <ClCompile Include="Vector.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="jsontest.txt" />

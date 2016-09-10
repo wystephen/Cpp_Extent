@@ -33,10 +33,16 @@
     <ClInclude Include="MyError.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="FUNCTIONBASE.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="test_main.cpp">
       <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Vector.h">
+      <Filter>头文件</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

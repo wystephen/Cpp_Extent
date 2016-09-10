@@ -86,11 +86,6 @@ public:
 	//	return Matrix<T>(tmp_matrix) ;
 	//}
 
-
-
-
-	
-    
 protected:
 
     int rows_=0;
@@ -101,6 +96,7 @@ protected:
 private:
 
 };
+
 template <class T>
 void Matrix<T>::SetValue(T *value) {
     if(rows_*cols_  == 0)
