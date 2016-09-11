@@ -90,15 +90,24 @@ public:
 	//}
 
 
+    inline int GetCols()
+    {
+        return cols_;
+    }
+
+    inline int GetRows()
+    {
+        return rows_;
+    }
 
 
-	
-    
+
+
 protected:
 
     int rows_=0;
     int cols_= 0;
-	
+
 	T* buf_;//Save the value of the matrix.
 
 private:
@@ -129,7 +138,7 @@ T* Matrix<T>::operator()(int a, int b)
 
 		return (buf_);
 	}
-	
+
 }
 
 template <class T>
@@ -234,8 +243,6 @@ Matrix<T> Matrix<T>::transport() {
             *(buf_+x*cols_+y) = *(t+y*src_cols+x);
         }
     }
-
-	//Todo:The pesude inverse of the matri.
 
     delete [] t;
     return *this;
