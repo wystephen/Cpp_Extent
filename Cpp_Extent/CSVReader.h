@@ -29,6 +29,8 @@ public:
 
     void test1();
 
+	Matrix<double> GetMatrix();
+
 private:
 
 protected:
@@ -76,6 +78,11 @@ void CSVReader::test1() {
 
 	std::cout << *m_(3,8) << std::endl;
 	std::cout << *m_.transport()(8,3) << std::endl;
+}
+
+inline Matrix<double> CSVReader::GetMatrix()
+{
+	return m_;
 }
 
 bool CSVReader::LoadData() {
