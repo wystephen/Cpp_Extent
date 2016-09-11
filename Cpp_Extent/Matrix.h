@@ -75,6 +75,9 @@ public:
 	/*Matrix add a single number,every elements in the matrix add this number.*/
 	Matrix operator+(double num);
 
+	/*Copy a Matrix*/
+    Matrix operator=(Matrix &b_matrix);
+
 	/*Typically Matrix multiply Matrix, first matrix's cols must equal to seconde matrix's rows.*/
 	Matrix operator*(Matrix &b_matrix);
 
@@ -235,6 +238,12 @@ Matrix<T> Matrix<T>::transport() {
     delete [] t;
     return *this;
 
+}
+
+template <class T>
+Matrix<T> Matrix::operator=(Matrix &b_matrix) {
+    Matrix<T> tmp(b_matrix);
+    return tmp;
 }
 
 
