@@ -2,6 +2,8 @@
 // Created by steve on 16-8-31.
 //
 
+#pragma once
+
 #include <iostream>
 
 #include <memory>
@@ -90,11 +92,13 @@ public:
 	//}
 
 
+    /*Return the cols_*/
     inline int GetCols()
     {
         return cols_;
     }
 
+    /*Reture the rows_*/
     inline int GetRows()
     {
         return rows_;
@@ -250,7 +254,7 @@ Matrix<T> Matrix<T>::transport() {
 }
 
 template <class T>
-Matrix<T> Matrix::operator=(Matrix &b_matrix) {
+Matrix<T> Matrix<T>::operator=(Matrix &b_matrix) {
     Matrix<T> tmp(b_matrix);
     return tmp;
 }
