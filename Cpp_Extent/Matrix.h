@@ -92,6 +92,7 @@ public:
 	//}
 
 
+
     /*Return the cols_*/
     inline int GetCols()
     {
@@ -258,5 +259,7 @@ Matrix<T> Matrix<T>::operator=(Matrix &b_matrix) {
     Matrix<T> tmp(b_matrix);
     return tmp;
 }
+
+
 
 
