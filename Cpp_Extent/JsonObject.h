@@ -367,6 +367,8 @@ inline JsonObject JsonObject::operator[](std::string key)
 	}
 }
 
+
+
 inline JsonObject JsonObject::operator[](int index)
 {
 	if (value_type_ == ValueType::ARRAY)

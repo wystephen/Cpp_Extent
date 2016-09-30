@@ -7,6 +7,7 @@
 << "COMPLIED ON " << __DATE__ << " at " << __TIME__ <<  std::endl\
 << "Info: " << err_info <<  std::endl << std::endl;
 
+#define MYCHECK(a) if(a) std::cout << __FILE__ << ":"<<__LINE__ << std::endl;
 
 //inline MyError::MyError(std::string err_info)
 //{

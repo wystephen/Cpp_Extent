@@ -2,6 +2,8 @@
 // Created by steve on 16-8-31.
 //
 
+#pragma once
+
 #include <iostream>
 
 #include <memory>
@@ -75,6 +77,9 @@ public:
 	/*Matrix add a single number,every elements in the matrix add this number.*/
 	Matrix operator+(double num);
 
+	/*Copy a Matrix*/
+    Matrix operator=(Matrix &b_matrix);
+
 	/*Typically Matrix multiply Matrix, first matrix's cols must equal to seconde matrix's rows.*/
 	Matrix operator*(Matrix &b_matrix);
 
@@ -86,11 +91,28 @@ public:
 	//	return Matrix<T>(tmp_matrix) ;
 	//}
 
+
+
+    /*Return the cols_*/
+    inline int GetCols()
+    {
+        return cols_;
+    }
+
+    /*Reture the rows_*/
+    inline int GetRows()
+    {
+        return rows_;
+    }
+
+
+
+
 protected:
 
     int rows_=0;
     int cols_= 0;
-	
+
 	T* buf_;//Save the value of the matrix.
 
 private:
@@ -122,7 +144,7 @@ T* Matrix<T>::operator()(int a, int b)
 
 		return (buf_);
 	}
-	
+
 }
 
 template <class T>
@@ -228,11 +250,17 @@ Matrix<T> Matrix<T>::transport() {
         }
     }
 
-	//Todo:The pesude inverse of the matri.
-
     delete [] t;
     return *this;
 
 }
+
+template <class T>
+Matrix<T> Matrix<T>::operator=(Matrix &b_matrix) {
+    Matrix<T> tmp(b_matrix);
+    return tmp;
+}
+
+
 
 
