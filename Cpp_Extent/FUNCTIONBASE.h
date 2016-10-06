@@ -12,9 +12,14 @@ public:
 	*/
 	virtual FuncValueType operator ()(ValueType val) = 0;
 
-
+	/*
+	Compute the drivative value of the function at the point represent by val.
+	*/
 	virtual DrivativeValueType derivative(ValueType val) = 0;
 
+	/*
+	A shorter function name for derivative.
+	*/
 	DrivativeValueType d(ValueType val)
 	{
 		return derivative(val);
