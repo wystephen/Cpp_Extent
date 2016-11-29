@@ -34,6 +34,8 @@ namespace plt = matplotlibcpp;
 
 namespace matplotlibcpp {
 
+    :wchar_t 
+
     namespace detail {
         struct _interpreter {
             PyObject *s_python_function_show;
