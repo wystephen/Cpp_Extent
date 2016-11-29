@@ -1,7 +1,7 @@
 //
 // Created by steve on 16-8-30.
 //
-
+#pragma once
 #include <iostream>
 #include "FileReader.h"
 
