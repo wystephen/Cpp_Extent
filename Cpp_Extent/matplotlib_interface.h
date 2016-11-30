@@ -34,7 +34,7 @@ namespace plt = matplotlibcpp;
 
 namespace matplotlibcpp {
 
-    :wchar_t 
+    :wchar_t
 
     namespace detail {
         struct _interpreter {
