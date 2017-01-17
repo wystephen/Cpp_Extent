@@ -18,8 +18,9 @@ int main()
 	//JsonObject job;
 	//JsonObject t = job["aaa"];
 	
-	CSVReader fr(std::string("u1.csv"));
+//	CSVReader fr(std::string("u1.csv"));
 
+	CSVReader fr(std::string("Zupt.data.csv"));
 //	fr.test1();
     for(int i(0);i<fr.rows_;++i)
 	{
