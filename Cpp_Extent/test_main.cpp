@@ -18,9 +18,13 @@ int main()
 	//JsonObject job;
 	//JsonObject t = job["aaa"];
 	
-	//CSVReader fr(std::string("u1.csv"));
+	CSVReader fr(std::string("u1.csv"));
 
-	//fr.test1();
+//	fr.test1();
+    for(int i(0);i<fr.rows_;++i)
+	{
+		std::cout << *fr.GetMatrix()(i,0) << std::endl;
+	}
 
 	//CSVReader magic(std::string("magicmatrix.csv"));
 	//Matrix<double> src_m(magic.GetMatrix());
